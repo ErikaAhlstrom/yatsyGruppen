@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(e){
     let calc_button=document.getElementById("calc");
     calc_button.addEventListener("click", function(event){
+
         let p1 = document.getElementById("player1");
         let p1_ones = document.getElementById("player1_ones"); ////objekt
         let p1_twos = document.getElementById("player1_twos");
@@ -34,8 +35,6 @@ document.addEventListener("DOMContentLoaded", function(e){
             p1_bonus.innerHTML = 0;
         }
 
-
-        
     });
 
 });
