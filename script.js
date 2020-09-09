@@ -80,11 +80,16 @@ document.addEventListener("DOMContentLoaded", function(e){
     console.log(calcFullHouse([5, 5, 6, 6, 6]));
 
 
-    //TODO: Random dice function
-    function diceRandomizer() {
-        Math.floor(Math.random() * 7);
+    //! Random dice function
+    function diceRandomizer() {         ////  slumpa fram fem tärningsvärden
+        let dice_throw = [];
+        for (let i = 0; i < 5; i++) {                           ////   slumpa siffra 5ggr med max värde NÄSTAN 6   
+            dice_throw[i] = Math.floor(Math.random() * 6) + 1;  ////   runda ner (blir max 5) +1 så ingen blir noll
+        }
+        
+        return dice_throw;
     }
-
+    
 
 });
 
