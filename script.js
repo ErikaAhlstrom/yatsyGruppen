@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(e){
     let calc_button=document.getElementById("calc");
     calc_button.addEventListener("click", function(event){
-        console.log(click);
+        console.log("click");
     });
 
 });
