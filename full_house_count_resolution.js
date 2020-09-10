@@ -29,7 +29,7 @@ function calcFullHouse(numbers_array) {
     let three_kind = 0;
     let full_house_score = 0;
 
-    if (arr.indexOf(2) > 0) {
+    if (arr.indexOf(2) > 0) {  //men vad händer om vi har 2 par? till ex[2,2,1,3,3]?
         pair = arr.indexOf(2); //// .indexOf letar efter värdet 2, returnar indexet
     }
     if (arr.indexOf(3) > 0) {
