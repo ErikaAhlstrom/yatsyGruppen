@@ -18,15 +18,24 @@ document.addEventListener("DOMContentLoaded", function(e){
                             p1_fours.value, 
                             p1_fives.value, 
                             p1_sixes.value];
+       
+           
+
         let sum = 0;
-        for (x of p1_sum_array) {
-            
-            let y = parseInt(x);
-            if (!x || x === NaN) {      //// varför funkar det
-                x = 0;
+            for (x of p1_sum_array) {
+                
+                let y = parseInt(x);
+                if (isNaN(x)) {        ////Erika: Bytte ut vår "kolla om det är nummer" kod till denna. Den gamla slutatde funka
+                y = 0;
+                }
+                sum += y;
             }
-            sum += y;
-        }
+
+         
+        /*  if (!x || x === NaN) {   
+                x = 0;
+            }   */                
+
         p1_sum.innerHTML = sum;
         
         if (sum >= 63) {
