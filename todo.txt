@@ -1,6 +1,6 @@
 PRIO
-() Ta bort beräknaknapp
-() Summa uppdateras automatiskt när ett fält uppdateras för spelare 1
+(x) Ta bort beräknaknapp
+x() Summa uppdateras automatiskt när ett fält uppdateras för spelare 1
 () tärningsformulär
 	() fem tärningsrutor 
 	() kryssrutor (checkbox - true false)
