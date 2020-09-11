@@ -8,116 +8,190 @@ document.addEventListener("DOMContentLoaded", function(e){
     let p1_sixes = document.getElementById("player1_sixes");
     let p1_sum = document.getElementById("player1_sum");
     let p1_bonus = document.getElementById("player1_bonus");
+    ////part two
+    let p1_pair = document.getElementById("p1_pair");
+    let p1_two_pairs = document.getElementById("p1_two_pairs");
+    let p1_three_kind = document.getElementById("p1_three_kind");
+    let p1_four_kind = document.getElementById("p1_four_kind");
+    let p1_sm_str = document.getElementById("p1_sm_str");
+    let p1_lg_str = document.getElementById("p1_lg_str");
+    let p1_house = document.getElementById("p1_house");
+    let p1_chance = document.getElementById("p1_chance");
+    let p1_yatzy = document.getElementById("p1_yatzy");
+    let p1_total = document.getElementById("p1_total");
 
-    let p1_sum_array = [p1_ones.value,  ////Amanda: Behövs den här arrayen längre?
-                        p1_twos.value, 
-                        p1_threes.value, 
-                        p1_fours.value, 
-                        p1_fives.value, 
-                        p1_sixes.value];  
+    ////tärnings-buttons att trycka på för att spara
+    document.getElementById("toggle_1").addEventListener("click", function(event){
+        event.preventDefault();
+        toggleKeepers(0);
+        console.log("toggled");
+    });;
+    document.getElementById("toggle_2").addEventListener("click", function(event){
+        event.preventDefault();
+        toggleKeepers(1);
+        console.log("toggled");
+    });;;
+    document.getElementById("toggle_3").addEventListener("click", function(event){
+        event.preventDefault();
+        toggleKeepers(2);
+        console.log("toggled");
+    });;;
+    document.getElementById("toggle_4").addEventListener("click", function(event){
+        event.preventDefault();
+        toggleKeepers(3);
+        console.log("toggled");
+    });;;
+    document.getElementById("toggle_5").addEventListener("click", function(event){
+        event.preventDefault();
+        toggleKeepers(4);
+        console.log("toggled");
+    });;;
+    
+
+
+    let p1_td_score_array = [p1_ones,  ////Amanda: Behövs den här arrayen längre?       Maja: jo hittills iaf!
+                        p1_twos, 
+                        p1_threes, 
+                        p1_fours, 
+                        p1_fives, 
+                        p1_sixes];  
+
+    //// tärningar att spara
+    let keep_click_arr = [false, false, false, false, false];
+    
+
+
     let sum = 0;
-    p1_ones.addEventListener("change", function(event){
-           
-        sum +=Number(p1_ones.value);   ////Amanda: Omvandlar p1_ones.value till number och adderar till summan
-           /* for (x of p1_sum_array) { ////Amanda: Behöver inte gå igenom hela arrayen om vi bara behöver ettorna
-                let y=Number(x);
-                console.log(y);
-                let y = parseInt(x);
-                if (isNaN(x)) {        ////Erika: Bytte ut vår "kolla om det är nummer" kod till denna. Den gamla slutatde funka
-                y = 0;
-                }
-                
+
+    //sum +=Number(p1_ones.value); //verkade inte behövas?/M ////Amanda: Omvandlar p1_ones.value till number och adderar till summan
+    //// La in Amandas i en loop istället, kallar fortf på Erikas addToSum vid varje td "change"
+    //// Varje td score får varsin eventlistener: /M
+    for (let td_score of p1_td_score_array) {
+        td_score.addEventListener("change", function(event){
+            //console.log(td_score);
+            p1_sum.innerHTML = addToSum(td_score.value);
+            if (sum >= 63) {
+                p1_bonus.innerHTML = 50;
+            } 
+            else {
+                p1_bonus.innerHTML = 0;
             }
-
-         
-        /*  if (!x || x === NaN) {   
-                x = 0;
-            }   */                
-
-        p1_sum.innerHTML = sum;
-        
-        if (sum >= 63) {
-            p1_bonus.innerHTML = 50;
-        } else {
-            p1_bonus.innerHTML = 0;
-        }
-
-    });
-    p1_twos.addEventListener("change", function(event){
-        p1_sum.innerHTML = addToSum(p1_twos.value);
-        if (sum >= 63) {
-            p1_bonus.innerHTML = 50;
-        } 
-        else {
-            p1_bonus.innerHTML = 0;
-        }
-
-    });
-    p1_threes.addEventListener("change", function(event){
-        p1_sum.innerHTML = addToSum(p1_threes.value);
-        if (sum >= 63) {
-            p1_bonus.innerHTML = 50;
-        } 
-        else {
-            p1_bonus.innerHTML = 0;
-        }
-
-    });
-    p1_fours.addEventListener("change", function(event){
-        p1_sum.innerHTML = addToSum(p1_fours.value);
-        if (sum >= 63) {
-            p1_bonus.innerHTML = 50;
-        } 
-        else {
-            p1_bonus.innerHTML = 0;
-        }
-
-    });
-    p1_fives.addEventListener("change", function(event){
-        p1_sum.innerHTML = addToSum(p1_fives.value);
-        if (sum >= 63) {
-            p1_bonus.innerHTML = 50;
-        } 
-        else {
-            p1_bonus.innerHTML = 0;
-        }
-
-    });
-    p1_sixes.addEventListener("change", function(event){
-        p1_sum.innerHTML = addToSum(p1_sixes.value);
-        if (sum >= 63) {
-            p1_bonus.innerHTML = 50;
-        } 
-        else {
-            p1_bonus.innerHTML = 0;
-        }
-
-    });
+        });
+    }
 
     function addToSum(x){
         sum+=Number(x);
         return sum;
     }
 
-    function countDice(dice_array) {
-        let values_array = []; ////Skapa en tom array
     
-        for (let i = 0; i <= 6; i++) { //// assignar värdet 0 till varje index i values
-            values_array[i] = 0;
-        }
     
-        // [0, 0, 0, 0, 0, 0, 0]    //// arrayen nu
-        // [0, 1, 2, 3, 4, 5, 6]    //// arrayens index
+    let roll_dice = document.getElementById("roll_dice");
+    let dice_shown_img_arr = new Array(5);
+    //// 5 träningar som syns i browsern
+    dice_shown_img_arr[0] = document.getElementById("dice_cell_1"); 
+    dice_shown_img_arr[1] = document.getElementById("dice_cell_2");
+    dice_shown_img_arr[2] = document.getElementById("dice_cell_3");
+    dice_shown_img_arr[3] = document.getElementById("dice_cell_4");
+    dice_shown_img_arr[4] = document.getElementById("dice_cell_5");
+
+
+    var dice_values_array = new Array(5);
+    var throws_left = 3;
+
+    //// tärningsbilder sparade i array
+    var dice_png_array = new Array(7);
+    dice_png_array[0] = "resources/images/dice/dice-zero.png";
+    dice_png_array[1] = "resources/images/dice/dice-one.png"; 
+    dice_png_array[2] = "resources/images/dice/dice-two.png";
+    dice_png_array[3] = "resources/images/dice/dice-three.png";
+    dice_png_array[4] = "resources/images/dice/dice-four.png";
+    dice_png_array[5] = "resources/images/dice/dice-five.png";
+    dice_png_array[6] = "resources/images/dice/dice-six.png";
     
-        for (let current_dice of dice_array) { 
-            values_array[current_dice]++;
-        }
-    
-        return values_array;
-    
+    for (let i = 0; i < dice_values_array.length; i++) {
+        dice_values_array[i] = 0;
     }
     
+    //TODO:      ALLMÄN TO-DO LIST                                                         
+    //TODO:  ( ) göra td_score klickbara                                                   
+    //TODO:  ( ) när man klickar en td_score cell:                                         
+    //TODO:  ( )      datan "fixeras" där så något sätt                                    
+    //TODO:  ( )      omgången avslutas (tex: throws_left = 0 eller rent av throws_left 3) 
+    //TODO:  ( )                         eller nåt mer exotiskt typ sätta igång nästa runda? kanske sen.... X´D 
+    //TODO:  ( )      snygga till css knappar osv.. borde synas på dem vilka som är "valda" också               
+    //TODO:  ( )      fyll på...                                                           
+
+
+
+
+
+
     
+    //! ROLL DICE   
+    roll_dice.addEventListener("click", function(event) {
+        //let contains_keep = dice_keep.includes(true); //// kollar om någon av tärningarna ska sparas
+        let random_throw = randomDiceArray(5);
+        console.log("Fem slumpade tärningar: " + random_throw); // Tärningarna som slumpades fram
+
+        //// & om man har inte slagit tre gånger redan
+        if (throws_left > 0) {
+            for (let i = 0; i < 5; i++) {
+
+                ////om tärning index [i] inte ska sparas:
+                if (!keep_click_arr[i]) {
+                    dice_shown_img_arr[i].src = dice_png_array[random_throw[i]];  //// byter bild motsvarande randomized tärningskast-array
+                    dice_values_array[i] = random_throw[i];
+
+                    
+                }   
+            }
+
+            //TODO:  Skicka till funktion(er) som räknar ut möjliga td_scores       
+            //TODO:  - där OM möjligt score lägg in som värde på td-score           
+            //TODO:    ________________________________________                     
+            //TODO:                                                                 
+            //TODO:    ( ) Pair                                                     
+            //TODO:    ( ) Two pairs                                                
+            //TODO:    ( ) Four of a kind                                           
+            //TODO:    ( ) Three of a kind                                          
+            //TODO:    (x) sm_straight                                              
+            //TODO:    ( ) lg_straight                                              
+            //TODO:    (x) Full house                                               
+            //TODO:    ( ) chance                                                   
+            //TODO:    ( ) yatzy                                                    
+            //TODO:                                                                 
+
+
+
+            p1_house.value = calcFullHouse(dice_values_array);   //// Möjlig kåk detta kast? skickar värde
+            p1_sm_str.value = calcSmStraight(dice_values_array); //// Möjlig small straight detta kast? skickar värde
+        }
+        console.log("Nya tärningskastet med sparade tärningar: " + dice_values_array);
+        throws_left --;
+    });
+
+
+    //! TOGGLE KEEP DICE FUNCTION
+    function toggleKeepers(i) {
+        if (keep_click_arr[i] === true) {
+            keep_click_arr[i] = false;
+        } else {
+            keep_click_arr[i] = true;
+        }
+    }
+
+    //? RESET TÄRNINGAR till spara ej ==== använd efter en omgång är slut eller början på ny omgång?
+    function resetKeepers() {
+        for (let i = 0; i < keep_click_arr.length; i++) { 
+            keep_click_arr[i] = false;
+        }
+    }
+
+    //* GAME SCORE FUNCTIONS
+    //=====================//
+
+    //!  FULL HOUSE FUNCTION
     function calcFullHouse(numbers_array) {
         let arr = countDice(numbers_array); //// skicka vidare till countDice funktionen
         let pair = 0;
@@ -136,31 +210,58 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
     
         return full_house_score;    //// returnar värde 0 om ej kåk, eller summan av kåken
-    
     }
-    
-    console.log(calcFullHouse([5, 5, 6, 6, 6]));
+    //! SMALL STRAIGHT FUNCTION
+    function calcSmStraight(numbers_array) {
+        console.log("nu testar vi straight");
+        let is_sm_straight = 0;
 
-
-    //! Random dice function
-    function diceRandomizer() {         ////  slumpa fram fem tärningsvärden
-        let dice_throw = [];
-        for (let i = 0; i < 5; i++) {                           ////   slumpa siffra 5ggr med max värde NÄSTAN 6   
-            dice_throw[i] = Math.floor(Math.random() * 6) + 1;  ////   runda ner (blir max 5) +1 så ingen blir noll
+        let arr = countDice(numbers_array); //// skicka vidare till countDice funktionen
+        for (let i = 1; i < 6; i++) {       //// kolla om index 1 - 5 innehåller värdet 1
+            if (arr[i] == 1) {
+                is_sm_straight ++;
+            }
         }
-        
-        return dice_throw;
+        if (is_sm_straight === 5) { 
+            return 15;          //// om det är en liten straight, return totala summan (alltid 15)
+        } else {
+            return 0;
+        }
     }
+
     
+    
+    
+}); 
+//* end of DOMContentLoaded                                                                                 
 
-});
 
 
 
 
+//! RANDOM DICE FUNCTION
+//// returnar fem random tärningsvärden i array
+function randomDiceArray(num_dices) {
+    var dice_array = new Array(num_dices);
+    for (let i = 0; i < dice_array.length; i++) {
+        //// runda ner till max 5 (+1 så ingen blir noll)
+        dice_array[i] = Math.floor(Math.random() * 6) + 1;  
+    }
+    return dice_array;
+}
 
-// let  = document.getElementById("headline");
-// let old_text = headline_variable.innerHTML; 
+//! RÄKNA HUR MÅNGA TÄRNINGAR AV VARJE
+function countDice(dice_array) {
+    let values_array = []; ////Skapa en tom array
+    for (let i = 0; i <= 6; i++) { //// assignar värdet 0 till varje index i values
+        values_array[i] = 0;
+    }
+    // [0, 0, 0, 0, 0, 0, 0]    //// arrayen nu
+    // [0, 1, 2, 3, 4, 5, 6]    //// arrayens index
 
-// console.log(old_text);
-// headline_variable.style.color = "red";
+    for (let current_dice of dice_array) { 
+        values_array[current_dice]++;
+    }
+    return values_array;
+}
+
