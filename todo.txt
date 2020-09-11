@@ -1,0 +1,15 @@
+PRIO
+() Ta bort beräknaknapp
+() Summa uppdateras automatiskt när ett fält uppdateras för spelare 1
+() tärningsformulär
+	() fem tärningsrutor 
+	() kryssrutor (checkbox - true false)
+	() en knapp
+() simulera tärningskast
+
+
+EXTRA
+() kryssade rutor ändras ej
+() håll reda på ant kast kvar
+(x) kirra bilder
+

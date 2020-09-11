@@ -34,11 +34,11 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
     
     roll_dice.addEventListener("click", function(event) {
-        let random_throw = randomDiceArray(5);
+        let random_throw = randomDiceArray();
         //// & om man har inte slagit tre gånger redan
         if (throws_left > 0) {
             for (let i = 0; i < 5; i++) {
-                console.log(random_throw[i]); // Tärningarna som slumpades fram
+                //console.log(random_throw[i]); // Tärningarna som slumpades fram
 
                     ////om tärning index [i] inte ska sparas:
                 if (!dice_keep[i]) {
@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
                     dice_values_array[i] = random_throw[i];
                 }   
             } 
+            throws_left--;
         }
         console.log("Nya tärningskastet med sparade tärningar: " + dice_values_array);
     });
@@ -54,8 +55,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
 
 //// returnar fem random tärningsvärden i array
-function randomDiceArray(num_dices) {
-    var dice_array = new Array(num_dices);
+function randomDiceArray() {
+    var dice_array = new Array();
     for (let i = 0; i < dice_array.length; i++) {
         //// runda ner till max 5 (+1 så ingen blir noll)
         dice_array[i] = Math.floor(Math.random() * 6) + 1;  
