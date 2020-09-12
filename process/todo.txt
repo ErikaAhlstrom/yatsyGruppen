@@ -1,15 +1,67 @@
+
+Maja tänker i skrift: SPELSCENARIOT
+
+____________________________________________________________
+
+(Ev nånting som ber om antal spelare och anpassar spelbrädet efter det)
+
+Nånting som säger att fylla i namn på spelare
+
+___________________________________________________
+
+
+while (det finns total score som inte är ifyllda) {
+	
+	for (player in playerarray) //loop som kör igenom alla spelare med tilldelade namn
+		gameplay(player)
+		
+}
+
+_____
+
+Funktion som kallas på en gång för varje spelare WHILE alla slutresultat inte är satta:
+		
+funktion  gameplay (player)
+
+		eventlistener click kasta-tärning-button 
+
+			if ( kast kvar )
+				visa möjliga poäng osv
+	
+				eventlistener click td_score_array[player]
+				avbryt for loop! // eller sätt kast kvar  -> 0
+		
+			else (kast kvar 0)
+			
+				”inga kast kvar, nästa spelares tur. välj din poäng”
+
+				eventlistener click td_score_array[player]
+				avbryt for loop! // eller sätt kast kvar  -> 0
+		}
+
+		sätt kast kvar -> 3
+		call reset keepers	function
+
+}		
+
+
+
+
+
+
+
 PRIO
 (x) Ta bort beräknaknapp
-x() Summa uppdateras automatiskt när ett fält uppdateras för spelare 1
-() tärningsformulär
-	() fem tärningsrutor 
-	() kryssrutor (checkbox - true false)
-	() en knapp
-() simulera tärningskast
+(x) Summa uppdateras automatiskt när ett fält uppdateras för spelare 1
+(x) tärningsformulär
+	(x) fem tärningsrutor 
+	(/) kryssrutor (checkbox - true false)
+	(x) en knapp
+(x) simulera tärningskast
 
 
 EXTRA
-() kryssade rutor ändras ej
-() håll reda på ant kast kvar
+(x) kryssade rutor ändras ej
+(x) håll reda på ant kast kvar
 (x) kirra bilder
 
