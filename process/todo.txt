@@ -56,8 +56,6 @@ funktion  gameplay (player)
 		"nästa spelares tur"
 
 		
-
-
 }		
 
 
