@@ -19,28 +19,44 @@ while (det finns total score som inte är ifyllda) {
 
 _____
 
+
+
 Funktion som kallas på en gång för varje spelare WHILE alla slutresultat inte är satta:
 		
-funktion  gameplay (player)
+funktion  gameplay (player)	
 
-		eventlistener click kasta-tärning-button 
-
-			if ( kast kvar )
-				visa möjliga poäng osv
-	
-				eventlistener click td_score_array[player]
-				avbryt for loop! // eller sätt kast kvar  -> 0
-		
-			else (kast kvar 0)
-			
-				”inga kast kvar, nästa spelares tur. välj din poäng”
-
-				eventlistener click td_score_array[player]
-				avbryt for loop! // eller sätt kast kvar  -> 0
-		}
 
 		sätt kast kvar -> 3
-		call reset keepers	function
+		call reset keepers function
+
+		let score_chosen = false; 
+
+		while (score_chosen = false) {		==en omgång==
+
+			eventlistener click kasta-tärning-button 	==ett kast==
+
+				if ( kast kvar )
+					visa möjliga poäng osv, kast kvar -1
+	
+					eventlistener click td_score_array[player] {
+						score_chosen = true;
+
+		
+				else (kast kvar 0)
+				
+					”inga kast kvar, nästa spelares tur. välj din poäng”
+					inga tärningar ändras (kallar ej på random dice)
+
+					eventlistener click td_score_array[player] {
+						score_chosen = true;
+
+			}
+		)
+
+		"nästa spelares tur"
+
+		
+
 
 }		
 
