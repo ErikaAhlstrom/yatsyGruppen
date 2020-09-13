@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     
     let roll_dice = document.getElementById("roll_dice");
     let dice_shown_img_arr = new Array(5);
-    //// 5 träningar som syns i browsern
+    //// 5 träningar som syns i browsern     (vilket img-element skickar vi ut bilden till)
     dice_shown_img_arr[0] = document.getElementById("dice_cell_1"); 
     dice_shown_img_arr[1] = document.getElementById("dice_cell_2");
     dice_shown_img_arr[2] = document.getElementById("dice_cell_3");
@@ -109,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     dice_png_array[5] = "resources/images/dice/dice-five.png";
     dice_png_array[6] = "resources/images/dice/dice-six.png";
     
+    //// alla tärningarna har noll från början, ingen tärning har kastats
     for (let i = 0; i < dice_values_array.length; i++) {
         dice_values_array[i] = 0;
     }
@@ -121,7 +122,9 @@ document.addEventListener("DOMContentLoaded", function(e){
     //TODO:  ( )                         eller nåt mer exotiskt typ sätta igång nästa runda? kanske sen.... X´D 
     //TODO:  ( )      snygga till css knappar osv.. borde synas på dem vilka som är "valda" också               
     //TODO:  ( )      fyll på...                                                           
-
+    //TODO:  ( ) när alla td_scores i övre blocket har "valts" av spelaren räknas bonusen ut och visas
+    //TODO:  ( ) när tärningar kastas visas alla möjliga poäng även i övre blocket
+    //TODO:  (/) skriv ut summan under övre blocket alltefter deras td score "valts"
 
 
 
@@ -129,9 +132,9 @@ document.addEventListener("DOMContentLoaded", function(e){
 
     
     //! ROLL DICE   
+    //* detta händer när man trycker på knappen vid tärningarna
     roll_dice.addEventListener("click", function(event) {
-        //let contains_keep = dice_keep.includes(true); //// kollar om någon av tärningarna ska sparas
-        let random_throw = randomDiceArray(5);
+        let random_throw = randomDiceArray();
         console.log("Fem slumpade tärningar: " + random_throw); // Tärningarna som slumpades fram
 
         //// & om man har inte slagit tre gånger redan
@@ -139,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function(e){
             for (let i = 0; i < 5; i++) {
 
                 ////om tärning index [i] inte ska sparas:
-                if (!keep_click_arr[i]) {
+                if (!keep_click_arr[i]) {   //// (keep_click_arr[i] === false)
                     dice_shown_img_arr[i].src = dice_png_array[random_throw[i]];  //// byter bild motsvarande randomized tärningskast-array
                     dice_values_array[i] = random_throw[i];
 
@@ -168,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function(e){
             p1_sm_str.value = calcSmStraight(dice_values_array); //// Möjlig small straight detta kast? skickar värde
         }
         console.log("Nya tärningskastet med sparade tärningar: " + dice_values_array);
-        throws_left --;
+        // throws_left --;  ////pausad tills vidare, slå på sen
     });
 
 
@@ -241,8 +244,8 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 //! RANDOM DICE FUNCTION
 //// returnar fem random tärningsvärden i array
-function randomDiceArray(num_dices) {
-    var dice_array = new Array(num_dices);
+function randomDiceArray() {
+    var dice_array = new Array(5);
     for (let i = 0; i < dice_array.length; i++) {
         //// runda ner till max 5 (+1 så ingen blir noll)
         dice_array[i] = Math.floor(Math.random() * 6) + 1;  
