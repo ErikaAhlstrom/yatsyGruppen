@@ -16,7 +16,7 @@ while (det finns total score som inte är ifyllda) {
 		gameplay(player)
 		
 }
-
+räkna ut totala summan längs ner
 _____
 
 
@@ -52,30 +52,10 @@ funktion  gameplay (player)
 
 			}
 		)
+		if (alla td_scores i övre blocket har "valts")
+			räkna ut summan i mitten
+			räkna ut bonus
 
 		"nästa spelares tur"
-
 		
 }		
-
-
-
-
-
-
-
-PRIO
-(x) Ta bort beräknaknapp
-(x) Summa uppdateras automatiskt när ett fält uppdateras för spelare 1
-(x) tärningsformulär
-	(x) fem tärningsrutor 
-	(/) kryssrutor (checkbox - true false)
-	(x) en knapp
-(x) simulera tärningskast
-
-
-EXTRA
-(x) kryssade rutor ändras ej
-(x) håll reda på ant kast kvar
-(x) kirra bilder
-

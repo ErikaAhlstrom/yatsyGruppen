@@ -49,12 +49,26 @@ document.addEventListener("DOMContentLoaded", function(e){
     
 
 
-    let p1_td_score_array = [p1_ones,  ////Amanda: Behövs den här arrayen längre?       Maja: jo hittills iaf!
-                        p1_twos, 
-                        p1_threes, 
-                        p1_fours, 
-                        p1_fives, 
-                        p1_sixes];  
+    let p1_td_score_array = [
+        p1_ones,  ////Amanda: Behövs den här arrayen längre?       Maja: jo hittills iaf!
+        p1_twos, 
+        p1_threes, 
+        p1_fours, 
+        p1_fives, 
+        p1_sixes
+    ];
+
+    let p1_td_second_score_array = [
+        p1_pair,
+        p1_two_pairs,
+        p1_three_kind,
+        p1_four_kind,
+        p1_sm_str,
+        p1_lg_str,
+        p1_house,
+        p1_chance,
+        p1_yatzy
+    ];                
 
     //// tärningar att spara
     let keep_click_arr = [false, false, false, false, false];
@@ -67,11 +81,11 @@ document.addEventListener("DOMContentLoaded", function(e){
     //// La in Amandas i en loop istället, kallar fortf på Erikas addToSum vid varje td "change"
     //// Varje td score får varsin eventlistener: /M
     for (let td_score of p1_td_score_array) {
-        td_score.addEventListener("change", function(event){
+        td_score.addEventListener("change", function(event){    //// ändra till click?
             //console.log(td_score);
             p1_sum.innerHTML = addToSum(td_score.value);
             if (sum >= 63) {
-                p1_bonus.innerHTML = 50;
+                p1_bonus.innerHTML = 50;   //// räkna ut bonus när alla övre td är ifyllda ist?
             } 
             else {
                 p1_bonus.innerHTML = 0;
@@ -79,10 +93,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         });
     }
 
-    function addToSum(x){
-        sum+=Number(x);
-        return sum;
-    }
+    
 
     
     
@@ -125,7 +136,6 @@ document.addEventListener("DOMContentLoaded", function(e){
     //TODO:  ( ) när alla td_scores i övre blocket har "valts" av spelaren räknas bonusen ut och visas
     //TODO:  ( ) när tärningar kastas visas alla möjliga poäng även i övre blocket
     //TODO:  (/) skriv ut summan under övre blocket alltefter deras td score "valts"
-
 
 
 
@@ -194,6 +204,7 @@ document.addEventListener("DOMContentLoaded", function(e){
             keep_click_arr[i] = false;
         }
     }
+
 
     //* GAME SCORE FUNCTIONS
     //=====================//
@@ -313,3 +324,8 @@ function countDice(dice_array) {
     return values_array;
 }
 
+//! LÄGGER TILL VALD TD_SCORE TILL SUMMAN
+function addToSum(x){
+    sum+=Number(x);
+    return sum;
+}
