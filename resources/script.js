@@ -159,16 +159,20 @@ document.addEventListener("DOMContentLoaded", function(e){
             //TODO:    ( ) Four of a kind                                           
             //TODO:    ( ) Three of a kind                                          
             //TODO:    (x) sm_straight                                              
-            //TODO:    ( ) lg_straight                                              
+            //TODO:    (x) lg_straight                                              
             //TODO:    (x) Full house                                               
-            //TODO:    ( ) chance                                                   
-            //TODO:    ( ) yatzy                                                    
+            //TODO:    (x) chance                                                   
+            //TODO:    (x) yatzy                                                    
             //TODO:                                                                 
 
 
 
             p1_house.value = calcFullHouse(dice_values_array);   //// Möjlig kåk detta kast? skickar värde
             p1_sm_str.value = calcSmStraight(dice_values_array); //// Möjlig small straight detta kast? skickar värde
+            p1_lg_str.value = calcLgStraight(dice_values_array); //// Möjlig large straight detta kast? skickar värde
+            p1_yatzy.value = calcYatzy(dice_values_array); //// Möjlig yatzy detta kast? skickar värde
+            p1_chance.value = calcChance(dice_values_array); //// Möjlig Chance detta kast? skickar värde
+
         }
         console.log("Nya tärningskastet med sparade tärningar: " + dice_values_array);
         // throws_left --;  ////pausad tills vidare, slå på sen
@@ -230,6 +234,47 @@ document.addEventListener("DOMContentLoaded", function(e){
         } else {
             return 0;
         }
+    }
+    //! LARGE STRAIGHT FUNCTION
+    function calcLgStraight(numbers_array) {
+        console.log("nu testar vi Large straight");
+        let is_lg_straight = 0;
+
+        let arr = countDice(numbers_array); //// skicka vidare till countDice funktionen
+        for (let i = 2; i < 7; i++) {       //// kolla om index 1 - 5 innehåller värdet 1
+            if (arr[i] == 1) {
+                is_lg_straight ++;
+            }
+        }
+        if (is_lg_straight === 5) { 
+            return 20;          //// om det är en liten straight, return totala summan (alltid 15)
+        } else {
+            return 0;
+        }
+    }
+
+    function calcYatzy(numbers_array) {
+        console.log("nu testar vi Yatzy");
+        let arr = countDice(numbers_array);
+        if (arr.includes(5)) {
+            return 50;
+        }
+
+        else {
+            return 0;
+        }
+
+    }
+
+    function calcChance(numbers_array) {
+        console.log("nu testar vi Chance");
+        let chanceSum = 0;
+        
+        for (i of numbers_array) {
+            chanceSum+=i;
+        }
+
+        return chanceSum;
     }
 
     
