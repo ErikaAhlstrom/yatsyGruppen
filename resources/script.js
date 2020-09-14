@@ -19,6 +19,31 @@ document.addEventListener("DOMContentLoaded", function(e){
     let p1_chance = document.getElementById("p1_chance");
     let p1_yatzy = document.getElementById("p1_yatzy");
     let p1_total = document.getElementById("p1_total");
+    p1.addEventListener("change",function(e){
+        p1=p1.value;
+    })
+    /* p1.addEventListener("change",function(e){
+           p1= p1.value;
+        })
+        let number_array=[];
+        roll_dice.addEventListener("click",rollDice);
+        
+//slumpar värdet
+
+
+
+  function rollDice(){
+    for(let i=1;i<=5;i++){
+    if (document.getElementById("dice_"+i).checked){
+    }
+    else
+{
+let slump= Math.floor(Math.random()*6+1);
+document.getElementById("image_"+i).src=("dice_img_"+slump+".png")
+number_array[(i-1)]=slump;
+}}
+  console.log (number_array);
+  }})*/
 
     ////tärnings-buttons att trycka på för att spara
     document.getElementById("toggle_1").addEventListener("click", function(event){
@@ -108,6 +133,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 
     var dice_values_array = new Array(5);
+
     var throws_left = 3;
 
     //// tärningsbilder sparade i array
